@@ -9,7 +9,7 @@ In this workshop you will learn how you can use Lambda@Edge to extend functional
 The workshop will demonstrate the usage of the following AWS services:
 * **Amazon S3**: the website's static files will be stored in an S3 bucket
 * **Amazon DynamoDB**: the dynamic data will be stored in a DynamoDB table
-* **Amazon CloudFront**: the fast and secure content delivery will performed by a CloudFront distribution
+* **Amazon CloudFront**: the fast and secure content delivery will be performed by a CloudFront distribution
 * **AWS Lambda@Edge**: the dynamic content generation and content customization will be driven by Lambda@Edge functions
 
 Here is how the website looks like at the beginning of the workshop:  
