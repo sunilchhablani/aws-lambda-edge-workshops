@@ -25,27 +25,27 @@ In the `Basic information` window, specify:
 
 Use JavaScript code from [ws-lambda-at-edge-select-nearer-origin.js](./ws-lambda-at-edge-select-nearer-origin.js) as a blueprint.
 
-![x](./img/pic-1-create-function-select-nearer-origin.png)
+<kbd>![x](./img/pic-1-create-function-select-nearer-origin.png)</kbd>
 
-![x](./img/pic-1-create-function-select-nearer-origin2.png)
+<kbd>![x](./img/pic-1-create-function-select-nearer-origin2.png)</kbd>
 
 #### 2 Validate the function works in Lambda Console
 
 Click `Save and Test` and configure the test event. Create new test event and use [ws-lambda-at-edge-select-nearer-origin-test-input.json](./ws-lambda-at-edge-select-nearer-origin-test-input.json) as a test input.
 
-![x](./img/pic-2-configure-test-event.png)
+<kbd>![x](./img/pic-2-configure-test-event.png)</kbd>
 
 Execute the test-invoke and validate that function execution succeeds and the origin refers to a bucket in `us-east-1`.
 
-![x](./img/pic-3-test-invoke-select-nearer-origin.png)
+<kbd>![x](./img/pic-3-test-invoke-select-nearer-origin.png)</kbd>
 
 #### 3 Publish a function version
 
 Choose "Publish new version" under "Actions", specify an optional description of a function version and click "Publish".
 
-![x](./img/pic-4-publish-function-version.png)
+<kbd>![x](./img/pic-4-publish-function-version.png)</kbd>
 
-![x](./img/pic-4-publish-function-version2.png)
+<kbd>![x](./img/pic-4-publish-function-version2.png)</kbd>
 
 
 #### 4 Create cache behavior for the images 
@@ -58,9 +58,9 @@ Jump to Cloudfront console and under the "Behaviors" tab, click "Create Behavior
 * Lambda Function Associations: Origin Request = `<lambda version ARN from the previous step>`
 * Click "Create"
 
-![x](./img/pic-5-create-new-behavior.png)
+<kbd>![x](./img/pic-5-create-new-behavior.png)</kbd>
 
-![x](./img/pic-5-create-new-behavior2.png)
+<kbd>![x](./img/pic-5-create-new-behavior2.png)</kbd>
 
 #### 5 Wait for the change to propagate
 
@@ -70,7 +70,7 @@ After any modification of a CloudFront distribution, the change should be propag
 
 CloudFront may have already cached the old version home page, let's purge any stale objects from the cache. Submit a wildcard invalidation '/*'.
 
-![x](./img/pic-6-invalidate.png)
+<kbd>![x](./img/pic-6-invalidate.png)</kbd>
 
 #### 7 The generated card details page is now fetching images from the nearer origin.
 
