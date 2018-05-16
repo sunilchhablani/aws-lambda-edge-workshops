@@ -11,7 +11,7 @@ Run the below curl command to send 10 requests to the Cloudfront distribution wi
 ```
 for i in {1..10}; do curl -v -w "time_total:%{time_total}\n" -o /dev/null -s -H "Cache-Control: cf-no-cache" "https://d123.cloudfront.net/card/960w/da8398f4.jpg"; done | grep time_total | awk -F ':' '{sum += $2; n++; print "Request: " n "  TotalTime: " $2} END {if (n > 0) print "==============================\nAverage Total Time: " sum/n"\n=============================="}'
 ```
-As part of this lab, we will create a new lambda function which will inspect `CloudFront-Viewer-Country` header, set by Cloudfront, to find the country of the viewer and if the viewer is located in United States or Canada, origin is updated to bucket in `us-east-1` region. On completion of this lab, depending upon viewer country of the users of this lab, the average total time taken might change. For users in US and Canada, since `us-east-1` is nearer than `eu-central-1`, the average total time taken should certaily be lesser.ise
+As part of this lab, we will create a new lambda function which will inspect `CloudFront-Viewer-Country` header, set by Cloudfront, to find the country of the viewer and if the viewer is located in United States or Canada, origin is updated to bucket in `us-east-1` region. On completion of this lab, depending upon viewer country of the users of this lab, the average total time taken might change. For users in US and Canada, since `us-east-1` is nearer than `eu-central-1`, the average total time taken should certainly be lesser than what we saw with bucket in `eu-central-1`.
 
 #### 1 Create a Lambda function
 
