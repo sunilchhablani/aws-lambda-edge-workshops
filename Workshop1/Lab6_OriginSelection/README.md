@@ -31,7 +31,7 @@ Use JavaScript code from [ws-lambda-at-edge-select-nearer-origin.js](./ws-lambda
 
 #### 2 Validate the function works in Lambda Console
 
-Click `Save and Test` and configure the test event. Create new test event and use [ws-lambda-at-edge-select-nearer-origin-test-input.json](./ws-lambda-at-edge-select-nearer-origin-test-input.js) as a test input.
+Click `Save and Test` and configure the test event. Create new test event and use [ws-lambda-at-edge-select-nearer-origin-test-input.json](./ws-lambda-at-edge-select-nearer-origin-test-input.json) as a test input.
 
 ![x](./img/pic-2-configure-test-event.png)
 
