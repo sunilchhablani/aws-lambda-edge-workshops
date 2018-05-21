@@ -242,7 +242,7 @@
     "S3BucketUS": {
       "Type": "AWS::S3::Bucket",
       "DependsOn": [
-        "TriggerLambdaReplicatedS3BucketEU"
+        "TriggerLambdaCreateS3BucketEU"
       ],
       "Properties": {
         "BucketName": {
@@ -446,10 +446,11 @@
                 "    func((err, data) => { if (err) reject(err); else resolve(data); });\n",
                 "});\n",
                 "\n",
-                "const s3ListObjects        = (params) => promise(x => s3.listObjects(params, x));\n",
-                "const s3GetObject          = (params) => promise(x => s3.getObject(params, x));\n",
-                "const s3PutObject          = (params) => promise(x => s3.putObject(params, x));\n",
-                "const ddbPutItem           = (params) => promise(x => ddb.putItem(params, x));\n",
+                "const s3ListObjects         = (params) => promise(x => s3.listObjects(params, x));\n",
+                "const s3GetObject           = (params) => promise(x => s3.getObject(params, x));\n",
+                "const s3PutObject           = (params) => promise(x => s3.putObject(params, x));\n",
+                "const ddbPutItem            = (params) => promise(x => ddb.putItem(params, x));\n",
+                "const ddbCreateGlobalTable  = (params) => promise(x => ddb.createGlobalTable(params, x));\n",
                 "\n",
                 "exports.handler = (event, context) => {\n",
                 "    console.log('event: ' + JSON.stringify(event, null, 2));\n",
@@ -486,6 +487,12 @@
                 "            })\n",
                 "        ));\n",
                 "\n",
+                "    const createGlobalTable =\n",
+                "        ddbCreateGlobalTable({ GlobalTableName: ddbTableName, ReplicationGroup: replicationGroup})\n",
+                "        .then(data => {\n",
+                "             console.log('Global table created!');\n",
+                "        });\n",
+                "\n",
                 "    const bootstrapDDB =\n",
                 "        s3GetObject({ Bucket: srcBucket, Key: 'bootstrap/cards.json' })\n",
                 "        .then(data => Promise.all(JSON.parse(data.Body)\n",
@@ -499,7 +506,7 @@
                 "            }))\n",
                 "        ));\n",
                 "\n",
-                "    Promise.all([ bootstrapS3, bootstrapDDB ])\n",
+                "    Promise.all([ bootstrapS3, createGlobalTable, bootstrapDDB ])\n",
                 "    .then(data => {\n",
                 "        console.log('done!');\n",
                 "        cfn.send(event, context, cfn.SUCCESS);\n",
@@ -519,7 +526,8 @@
       "Type": "Custom::BootstrapFunction",
       "DependsOn": [
         "DdbCardsTable",
-        "S3BucketUS"
+        "S3BucketUS",
+        "TriggerLambdaCreateDdbTableEU"
       ],
       "Properties": {
         "ServiceToken": {
@@ -539,12 +547,12 @@
         }
       }
     },
-    "TriggerLambdaReplicatedS3BucketEU": {
+    "TriggerLambdaCreateS3BucketEU": {
       "Type": "Custom::LambdaTrig",
       "Properties": {
         "ServiceToken": {
           "Fn::GetAtt": [
-            "ReplicateBucketFunction",
+            "CreateS3BucketFunction",
             "Arn"
           ]
         },
@@ -579,7 +587,19 @@
             ]
           ]
         },
-        "BucketRegion": "eu-central-1",
+        "BucketRegion": "eu-central-1"
+      }
+    },
+    "TriggerLambdaCreateDdbTableEU": {
+      "Type": "Custom::LambdaTrig",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CreateDdbTableFunction",
+            "Arn"
+          ]
+        },
+        "Region": "eu-central-1",
         "DdbTableName": {
           "Fn::Join": [
             "-",
@@ -613,12 +633,12 @@
         }
       }
     },
-    "ReplicateBucketFunction": {
+    "CreateS3BucketFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Handler": "index.handler",
         "Runtime": "nodejs6.10",
-        "Timeout": 100,
+        "Timeout": 60,
         "Role": {
           "Fn::GetAtt": [
             "IamLambdaExecutionRoleFullAccess",
@@ -693,6 +713,73 @@
                 "                        });\n",
                 "                    }\n",
                 "                });\n",
+                "            }\n",
+                "        });\n",
+                "    } else if (event.RequestType == 'Delete') {\n",
+                "        console.log('Please delete the ' + event.PhysicalResourceId + ' bucket.');\n",
+                "        response.send(event, context, response.SUCCESS, {}, event.PhysicalResourceId);\n",
+                "        callback(null);\n",
+                "    }\n",
+                "};\n"
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "CreateDdbTableFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "Runtime": "nodejs6.10",
+        "Timeout": 60,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamLambdaExecutionRoleFullAccess",
+            "Arn"
+          ]
+        },
+        "Code": {
+          "ZipFile": {
+            "Fn::Join": [
+              "",
+              [
+                "var aws = require('aws-sdk');\n",
+                "var response = require('cfn-response');\n",
+                "exports.handler = function(event, context, callback) {\n",
+                "\n",
+                "    var ddb = new aws.DynamoDB({\n",
+                "        region: event.ResourceProperties.Region\n",
+                "    });\n",
+                "    \n",
+                "    if (event.RequestType == 'Create' || event.RequestType == 'Update') {\n",
+                "        var ddbTableParams = {\n",
+                "            AttributeDefinitions: [{\n",
+                "                AttributeName: 'CardId',\n",
+                "                AttributeType: 'S'\n",
+                "            }],\n",
+                "            KeySchema: [{\n",
+                "                AttributeName: 'CardId',\n",
+                "                KeyType: 'HASH'\n",
+                "            }],\n",
+                "            ProvisionedThroughput: {\n",
+                "                ReadCapacityUnits: 5,\n",
+                "                WriteCapacityUnits: 5\n",
+                "            },\n",
+                "            StreamSpecification: {\n",
+                "                StreamEnabled: true,\n",
+                "                StreamViewType: 'NEW_AND_OLD_IMAGES'\n",
+                "            },\n",
+                "            TableName: event.ResourceProperties.DdbTableName\n",
+                "        };\n",
+                "        ddb.createTable(ddbTableParams, function(err, data) {\n",
+                "            if (err) {\n",
+                "                console.log(err, err.stack);\n",
+                "                response.send(event, context, response.FAILED, err);\n",
+                "            } else {\n",
+                "                console.log(data);\n",
+                "                response.send(event, context, response.SUCCESS, {}, event.BucketName);\n",
+                "                callback(null, 'DDB Table Created!');\n",
                 "            }\n",
                 "        });\n",
                 "    } else if (event.RequestType == 'Delete') {\n",
