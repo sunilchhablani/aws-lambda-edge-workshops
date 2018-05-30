@@ -6,13 +6,13 @@ In this lab, you will learn how to create a Lambda function that changes S3 orig
 
 **NOTE:** Here and below throughout the workshop, replace the example domain name `d123.cloudfront.net` with the unique name of your distribution.
 
-Currently the images served by your CloudFront distribution are read from an S3 bucket located in `eu-central-1`. 
+Currently the images served by your CloudFront distribution are read from an S3 bucket located in "EU (Frakfurt)". 
 
-As part of this lab, we will create a new lambda function which will inspect `CloudFront-Viewer-Country` header, set by Cloudfront, to find the country of the viewer and if the viewer is located in United States or Canada, origin is updated to bucket in `us-west-2` region. On completion of this lab, depending upon viewer country of the users of this lab, the average response time might change. For users in US and Canada, since `us-west-2` is nearer than `eu-central-1`, the average response time should be considerably lesser.
+As part of this lab, we will create a new lambda function which will inspect `CloudFront-Viewer-Country` header, set by Cloudfront, to find the country of the viewer and if the viewer is located in United States or Canada, origin is updated to bucket in "US West (Oregon)" region. On completion of this lab, depending upon viewer country of the users of this lab, the average response time might change. For users in US and Canada, since "US West (Oregon)" is nearer than "EU (Frakfurt)", the average response time should be considerably lesser.
 
 #### 1 Create new cache behavior for the images
 
-To calculate the average response time to fetch an image from S3 origin in `eu-central-1` region, create a new cache behaviour with TTL set to 0. On setting TTL to 0, Cloudfront doesn't cache the objects and the request is always sent to origin.
+To calculate the average response time to fetch an image from S3 origin in "EU (Frakfurt)" region, create a new cache behaviour with TTL set to 0. On setting TTL to 0, Cloudfront doesn't cache the objects and the request is always sent to origin.
 
 Jump to Cloudfront console, click on distribution ID and under `Behaviors` tab, click on `Create Behavior`. Choose the following Cache Behavior settings:
 * Path Pattern: /card/*.jpg
@@ -55,7 +55,7 @@ Click `Save and Test` and configure the test event. Create new test event and us
 
 <kbd>![x](./img/configure-test-event.png)</kbd>
 
-Execute the test-invoke and validate that function execution succeeds and the origin refers to a bucket in `us-west-2`.
+Execute the test-invoke and validate that function execution succeeds and the origin refers to a bucket in "US West (Oregon)".
 
 <kbd>![x](./img/test-invoke-select-nearer-origin.png)</kbd>
 
@@ -92,7 +92,7 @@ CloudFront may have already cached the old version home page, let's purge any st
 
 #### 9 Verify change in average response time
 
-Again open [https://d123.cloudfront.net/get_average_time_taken.html](https://d123.cloudfront.net/get_average_time_taken.html) to send few requests to fetch an image from an S3 origin and calculate the average response time. For users in US and CA, the average response time should now be considerably lesser as compared against fetching an image from an S3 bucket in `eu-central-1`.
+Again open [https://d123.cloudfront.net/get_average_time_taken.html](https://d123.cloudfront.net/get_average_time_taken.html) to send few requests to fetch an image from an S3 origin and calculate the average response time. For users in US and CA, the average response time should now be considerably lesser as compared against fetching an image from an S3 bucket in "EU (Frakfurt)".
 
 <kbd>![x](./img/get-updated-average-response-time.png)</kbd>
 

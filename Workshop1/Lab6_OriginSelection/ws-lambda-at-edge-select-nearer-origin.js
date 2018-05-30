@@ -6,7 +6,7 @@ const regionToBucketMapping  =  {
 
 const countryToRegionMapping  =  {
     'US': 'us-west-2',
-    'CA': 'us-west-2'     
+    'CA': 'us-west-2'
 };
 
 exports.handler = (event, context, callback) => {
