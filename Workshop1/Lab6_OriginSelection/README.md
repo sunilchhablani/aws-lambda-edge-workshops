@@ -1,19 +1,39 @@
 ## Lab 6 - Origin Selection
 
-With Lambda@Edge, besides modifying requests and responses by changing URIs, cookies, headers and query strings, you can also modify the origin in lambda function triggered by origin-request event. In this case, when there is a cache miss, instead of going to the configured origin, CloudFront will send request to origin updated in the origin-request event.
+With Lambda@Edge, one can front multiple backend origin application services with Amazon CloudFront and use Lambda@Edge to route requests to the appropriate origin dynamically, based on the attributes of the request. For example, you can have multiple microservices based backend origins that your Lambda@Edge functions can dynamically route to by inspecting request attributes like query strings, headers or cookies. Or you can route your viewers to the most optimal origin for latency or data locality if it is meant to run geographically distributed applications in different AWS regions. Content-based dynamic origin selection also lets you simplify your origin infrastructure by moving request routing logic from a fleet of reverse proxy servers that you would have had to manage to serverless Lambda@Edge functions.
 
-In this lab, you will learn how to create a Lambda function that changes S3 origin region based on country of the viewer to serve content from nearby region for lower latencies. 
+In this lab, you will learn how to create a Lambda function that changes S3 origin region based on country of the viewer to serve content from nearer region for lower latencies. 
 
 **NOTE:** Here and below throughout the workshop, replace the example domain name `d123.cloudfront.net` with the unique name of your distribution.
 
-Currently the images served by your CloudFront distribution, created by CloudFormation for this workshop, are read from an S3 bucket located in `eu-central-1`. 
-Run the below curl command to send 10 requests to the Cloudfront distribution with `Cache-Control` header value as `cf-no-cache` so that the image is served from S3 origin instead of cache, and note down the average total time.
-```
-for i in {1..10}; do curl -v -w "time_total:%{time_total}\n" -o /dev/null -s -H "Cache-Control: cf-no-cache" "https://d123.cloudfront.net/card/960w/da8398f4.jpg"; done | grep time_total | awk -F ':' '{sum += $2; n++; print "Request: " n "  TotalTime: " $2} END {if (n > 0) print "==============================\nAverage Total Time: " sum/n"\n=============================="}'
-```
-As part of this lab, we will create a new lambda function which will inspect `CloudFront-Viewer-Country` header, set by Cloudfront, to find the country of the viewer and if the viewer is located in United States or Canada, origin is updated to bucket in `us-east-1` region. On completion of this lab, depending upon viewer country of the users of this lab, the average total time taken might change. For users in US and Canada, since `us-east-1` is nearer than `eu-central-1`, the average total time taken should certainly be lesser than what we saw with bucket in `eu-central-1`.
+Currently the images served by your CloudFront distribution are read from an S3 bucket located in `eu-central-1`. 
 
-#### 1 Create a Lambda function
+As part of this lab, we will create a new lambda function which will inspect `CloudFront-Viewer-Country` header, set by Cloudfront, to find the country of the viewer and if the viewer is located in United States or Canada, origin is updated to bucket in `us-west-2` region. On completion of this lab, depending upon viewer country of the users of this lab, the average response time might change. For users in US and Canada, since `us-west-2` is nearer than `eu-central-1`, the average response time should be considerably lesser.
+
+#### 1 Create new cache behavior for the images
+
+To calculate the average response time to fetch an image from S3 origin in `eu-central-1` region, create a new cache behaviour with TTL set to 0. On setting TTL to 0, Cloudfront doesn't cache the objects and the request is always sent to origin.
+
+Jump to Cloudfront console, click on distribution ID and under `Behaviors` tab, click on `Create Behavior`. Choose the following Cache Behavior settings:
+* Path Pattern: /card/*.jpg
+* Viewer Protocol Policy: Redirect HTTP to HTTPS
+* Object Caching: Customize
+* Minimum TTL: 0
+* Maximum TTL: 0
+* Default TTL: 0
+* Click "Create"
+
+<kbd>![x](./img/create-new-behavior.png)</kbd>
+
+<kbd>![x](./img/create-new-behavior2.png)</kbd>
+
+#### 2 Calculate time taken to fetch an image from an S3 origin
+
+Open [https://d123.cloudfront.net/get_average_time_taken.html](https://d123.cloudfront.net/get_average_time_taken.html) to send few requests to fetch an image from an S3 origin and calculate the average response time. Make a note of this resultant average response time.
+
+<kbd>![x](./img/get-average-response-time.png)</kbd>
+
+#### 3 Create a Lambda function
 
 Similar to how we did it in the previous labs, create a Lambda function in "US East (N.Virginia)" region.
 
@@ -25,56 +45,65 @@ In the `Basic information` window, specify:
 
 Use JavaScript code from [ws-lambda-at-edge-select-nearer-origin.js](./ws-lambda-at-edge-select-nearer-origin.js) as a blueprint.
 
-<kbd>![x](./img/pic-1-create-function-select-nearer-origin.png)</kbd>
+<kbd>![x](./img/create-function-select-nearer-origin.png)</kbd>
 
-<kbd>![x](./img/pic-1-create-function-select-nearer-origin2.png)</kbd>
+<kbd>![x](./img/create-function-nearer-origin2.png)</kbd>
 
-#### 2 Validate the function works in Lambda Console
+#### 4 Validate the function works in Lambda Console
 
 Click `Save and Test` and configure the test event. Create new test event and use [ws-lambda-at-edge-select-nearer-origin-test-input.json](./ws-lambda-at-edge-select-nearer-origin-test-input.json) as a test input.
 
-<kbd>![x](./img/pic-2-configure-test-event.png)</kbd>
+<kbd>![x](./img/configure-test-event.png)</kbd>
 
-Execute the test-invoke and validate that function execution succeeds and the origin refers to a bucket in `us-east-1`.
+Execute the test-invoke and validate that function execution succeeds and the origin refers to a bucket in `us-west-2`.
 
-<kbd>![x](./img/pic-3-test-invoke-select-nearer-origin.png)</kbd>
+<kbd>![x](./img/test-invoke-select-nearer-origin.png)</kbd>
 
-#### 3 Publish a function version
+#### 5 Publish a function version
 
 Choose "Publish new version" under "Actions", specify an optional description of a function version and click "Publish".
 
-<kbd>![x](./img/pic-4-publish-function-version.png)</kbd>
+<kbd>![x](./img/publish-function-version.png)</kbd>
 
-<kbd>![x](./img/pic-4-publish-function-version2.png)</kbd>
+<kbd>![x](./img/publish-function-version2.png)</kbd>
 
 
-#### 4 Create cache behavior for the images 
+#### 6 Update cache behavior for the images 
 
-Jump to Cloudfront console and under the "Behaviors" tab, click "Create Behavior". Choose the following settings:
-* Path Pattern: /card/*.jpg
-* Viewer Protocol Policy: Redirect HTTP to HTTPS
+Jump to Cloudfront console and under the "Behaviors" tab, select entry with Path Pattern `/card/*.jpg`, click "Edit" and update following settings:
 * Cache Based on Selected Request Headers: Whitelist
 * Whitelist Headers: Select `CloudFront-Viewer-Country` and click `Add >>`
 * Lambda Function Associations: Origin Request = `<lambda version ARN from the previous step>`
-* Click "Create"
+* Click "Yes, Edit"
 
-<kbd>![x](./img/pic-5-create-new-behavior.png)</kbd>
+<kbd>![x](./img/update-behavior.png)</kbd>
 
-<kbd>![x](./img/pic-5-create-new-behavior2.png)</kbd>
+<kbd>![x](./img/update-behavior2.png)</kbd>
 
-#### 5 Wait for the change to propagate
+#### 7 Wait for the change to propagate
 
-After any modification of a CloudFront distribution, the change should be propagated globally to all CloudFront edge locations. The propagation status is indicated as "In Progress" and "Deployed" when it's complete. Usually ~30-60seconds is enough for the change to take effect, even though the status may be still "In Progress". To be 100% certain though you can wait until the change is fully deployed.
+After any modification of a CloudFront distribution, the change should be propagated globally to all CloudFront edge locations. The propagation status is indicated as "In Progress" and "Deployed" when it's complete. Usually ~30-60seconds is enough for the change to take effect, even though the status may be still "In Progress". Though to be 100% certain, you can wait until the change is fully deployed.
 
-#### 6 Invalidate CloudFront cache
+#### 8 Invalidate CloudFront cache
 
 CloudFront may have already cached the old version home page, let's purge any stale objects from the cache. Submit a wildcard invalidation '/*'.
 
-<kbd>![x](./img/pic-6-invalidate.png)</kbd>
+<kbd>![x](./img/invalidate.png)</kbd>
 
-#### 7 The generated card details page is now fetching images from the nearer origin.
+#### 9 Verify change in average response time
 
-To verify the same; again run the curl command and for the users in US and Canada, average total time taken should be lesser than what we saw with S3 origin bucket in `eu-central-1` region.
-```
-for i in {1..10}; do curl -v -w "time_total:%{time_total}\n" -o /dev/null -s -H "Cache-Control: cf-no-cache" "https://d123.cloudfront.net/card/960w/da8398f4.jpg"; done | grep time_total | awk -F ':' '{sum += $2; n++; print "Request: " n "  TotalTime: " $2} END {if (n > 0) print "==============================\nAverage Total Time: " sum/n"\n=============================="}'
-```  
+Again open [https://d123.cloudfront.net/get_average_time_taken.html](https://d123.cloudfront.net/get_average_time_taken.html) to send few requests to fetch an image from an S3 origin and calculate the average response time. For users in US and CA, the average response time should now be considerably lesser as compared against fetching an image from an S3 bucket in `eu-central-1`.
+
+<kbd>![x](./img/get-updated-average-response-time.png)</kbd>
+
+#### 10 Update cache behavior to allow object caching
+
+In step 1, we had disabled object caching for images by setting TTL to 0 to demonstrate how origin selection feature can be used to further reduce latencies based on `CloudFront-Viewer-Country` header. Let's change back the TTL setting to default so as to enable object caching again.
+
+Jump to Cloudfront console and under the "Behaviors" tab, select entry with Path Pattern `/card/*.jpg`, click "Edit" and update following settings:
+* Object Caching: Use Origin Cache Headers
+* Click "Yes, Edit"
+
+<kbd>![x](./img/update-behavior.png)</kbd>
+
+<kbd>![x](./img/update-behavior-ttl.png)</kbd>
