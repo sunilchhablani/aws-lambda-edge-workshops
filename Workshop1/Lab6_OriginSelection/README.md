@@ -47,7 +47,7 @@ Use JavaScript code from [ws-lambda-at-edge-select-nearer-origin.js](./ws-lambda
 
 <kbd>![x](./img/create-function-select-nearer-origin.png)</kbd>
 
-<kbd>![x](./img/create-function-nearer-origin2.png)</kbd>
+<kbd>![x](./img/create-function-select-nearer-origin2.png)</kbd>
 
 #### 4 Validate the function works in Lambda Console
 
