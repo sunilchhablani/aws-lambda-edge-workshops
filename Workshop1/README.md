@@ -26,7 +26,7 @@ Click the launch stack button below to kick it off, accept all default values an
 
 Region | Button
 ------------ | -------------
-us-east-1 | [![Launch stack in us-east-1](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=WsLambdaAtEdgeAlienCards&templateURL=https://s3.amazonaws.com/ws-lambda-at-edge/bootstrap/cfn-template.json)
+us-west-2 | [![Launch stack in us-west-2](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=WsLambdaAtEdgeAlienCards&templateURL=https://s3.amazonaws.com/ws-lambda-at-edge/bootstrap/cfn-template-2.json)
 
 Need more detailed instructions? Proceed to  
 [Lab 0 - Launch the stack (steps with screenshots)](./Lab0_LaunchTheStack/README.md)
