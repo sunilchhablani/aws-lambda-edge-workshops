@@ -15,13 +15,14 @@ As part of this lab, we will create a new lambda function which will inspect `Cl
 To calculate the average response time to fetch an image from S3 origin in "EU (Frakfurt)" region, create a new cache behaviour with TTL set to 0. On setting TTL to 0, Cloudfront doesn't cache the objects and the request is always sent to origin.
 
 Jump to Cloudfront console, click on distribution ID and under `Behaviors` tab, click on `Create Behavior`. Choose the following Cache Behavior settings:
-* Path Pattern: /card/*.jpg
-* Viewer Protocol Policy: Redirect HTTP to HTTPS
-* Object Caching: Customize
-* Minimum TTL: 0
-* Maximum TTL: 0
-* Default TTL: 0
-* Click "Create"
+* `Path Pattern`: `/card/*.jpg`
+* `Viewer Protocol Policy`: `Redirect HTTP to HTTPS`
+* `Object Caching`: `Customize`
+* `Minimum TTL`: `0`
+* `Maximum TTL`: `0`
+* `Default TTL`: `0`
+
+Click `Create`
 
 <kbd>![x](./img/create-new-behavior.png)</kbd>
 
@@ -70,11 +71,12 @@ Choose "Publish new version" under "Actions", specify an optional description of
 
 #### 6 Update cache behavior for the images 
 
-Jump to Cloudfront console and under the "Behaviors" tab, select entry with Path Pattern `/card/*.jpg`, click "Edit" and update following settings:
-* Cache Based on Selected Request Headers: Whitelist
-* Whitelist Headers: Select `CloudFront-Viewer-Country` and click `Add >>`
-* Lambda Function Associations: Origin Request = `<lambda version ARN from the previous step>`
-* Click "Yes, Edit"
+Jump to Cloudfront console and under the "Behaviors" tab, select entry with Path Pattern `/card/*.jpg`, click `Edit` and update following settings:
+* `Cache Based on Selected Request Headers`: `Whitelist`
+* `Whitelist Headers`: Select `CloudFront-Viewer-Country` and click `Add >>`
+* `Lambda Function Associations: `Origin Request` = `<lambda version ARN from the previous step>`
+
+ Click `Yes, Edit`
 
 <kbd>![x](./img/update-behavior.png)</kbd>
 
@@ -82,7 +84,7 @@ Jump to Cloudfront console and under the "Behaviors" tab, select entry with Path
 
 #### 7 Wait for the change to propagate
 
-After any modification of a CloudFront distribution, the change should be propagated globally to all CloudFront edge locations. The propagation status is indicated as "In Progress" and "Deployed" when it's complete. Usually ~30-60seconds is enough for the change to take effect, even though the status may be still "In Progress". Though to be 100% certain, you can wait until the change is fully deployed.
+Wait for ~30-60 seconds for the change to propagate and for the Lambda function to get globally replicated.
 
 #### 8 Invalidate CloudFront cache
 
@@ -90,9 +92,9 @@ CloudFront may have already cached the old version home page, let's purge any st
 
 <kbd>![x](./img/invalidate.png)</kbd>
 
-#### 9 Verify change in average response time
+#### 9 Verify change in average home page load time
 
-Again open [https://d123.cloudfront.net/get_average_time_taken.html](https://d123.cloudfront.net/get_average_time_taken.html) to send few requests to fetch an image from an S3 origin and calculate the average response time. For users in US and CA, the average response time should now be considerably lesser as compared against fetching an image from an S3 bucket in "EU (Frakfurt)".
+Again open [https://d123.cloudfront.net/get_average_home_page_load_time.html](https://d123.cloudfront.net/get_average_time_taken.html) to send few requests to fetch an image from an S3 origin and calculate the average response time. For users in US and CA, the average response time should now be considerably lesser as compared against fetching an image from an S3 bucket in "EU (Frakfurt)".
 
 <kbd>![x](./img/get-updated-average-response-time.png)</kbd>
 
@@ -101,8 +103,9 @@ Again open [https://d123.cloudfront.net/get_average_time_taken.html](https://d12
 In step 1, we had disabled object caching for images by setting TTL to 0 to demonstrate how origin selection feature can be used to further reduce latencies based on `CloudFront-Viewer-Country` header. Let's change back the TTL setting to default so as to enable object caching again.
 
 Jump to Cloudfront console and under the "Behaviors" tab, select entry with Path Pattern `/card/*.jpg`, click "Edit" and update following settings:
-* Object Caching: Use Origin Cache Headers
-* Click "Yes, Edit"
+* `Object Caching`: `Use Origin Cache Headers`
+
+Click `Yes, Edit`
 
 <kbd>![x](./img/update-behavior.png)</kbd>
 

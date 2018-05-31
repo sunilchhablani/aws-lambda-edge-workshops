@@ -1,7 +1,7 @@
 'use strict';
 
 const regionToBucketMapping  =  {
-    'us-west-2' : FIXME    // Copy S3 bucket name in us-east-1, for example, 'ws-lambda-at-edge-us-c0ea3af0'
+    'us-west-2' : FIXME    // Copy S3 bucket name in us-west-2, for example, 'ws-lambda-at-edge-us-c0ea3af0'
 };
 
 const countryToRegionMapping  =  {
