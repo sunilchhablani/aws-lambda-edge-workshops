@@ -40,29 +40,29 @@ In the `Basic information` window, select:
 * `Role`: `Choose an existing role`
 * `Existing role`: `ws-lambda-at-edge-basic-<UNIQUE_ID>` (this allows the function to push the logs to CloudWatch Logs)
 
-![x](./img/pic-1-create-function-customize-css.png)
+<kbd>![x](./img/pic-1-create-function-customize-css.png)</kbd>
 
 Use JavaScript code from [ws-lambda-at-edge-customize-css.js](./ws-lambda-at-edge-customize-css.js) as a blueprint.
 
 Take a moment to familiarize yourself with the function code and what it does.
 
-![x](./img/pic-1-create-function-customize-css2.png)
+<kbd>![x](./img/pic-1-create-function-customize-css2.png)</kbd>
 
 #### 2. Validate the function works in Lambda Console
 
 Click "Save and test" and configure the test event. Use the test event from [ws-lambda-at-edge-customize-css-test-event.json](./ws-lambda-at-edge-customize-css-test-event.json). Set the `uri` value to `css/style.css`.
 
-![x](./img/pic-2-configure-test-event.png)
+<kbd>![x](./img/pic-2-configure-test-event.png)</kbd>
 
 Click `Test` and validate the function has returned `200` status code and the `uri` has been updated to `/css/mobile/style.css`.
 
-![x](./img/pic-3-test-invoke-customize-css.png)
+<kbd>![x](./img/pic-3-test-invoke-customize-css.png)</kbd>
 
 #### 3. Publish a function version
 
 Choose `Publish new version` under `Actions`, specify an optional description of a function version and click `Publish`.
 
-![x](./img/pic-4-publish-function-version.png)
+<kbd>![x](./img/pic-4-publish-function-version.png)</kbd>
 
 #### 4. Create a new cache behavior for the CSS files
 
@@ -77,7 +77,7 @@ Under the `Behaviors` tab, click `Create Behavior`. Choose the following setting
 
 Click `Create`.
 
-![x](./img/pic-5-create-new-cachebehavior.png)
+<kbd>![x](./img/pic-5-create-new-cachebehavior.png)</kbd>
 
 #### 5. Wait for the change to propagate
 
@@ -87,7 +87,7 @@ Wait for ~30-60 seconds for the change to propagate and for the Lambda function 
 
 CloudFront may have already cached the old version css, let's purge any stale objects from the cache. Submit a wildcard invalidation `/*`.
 
-![x](./img/pic-6-invalidate.png)
+<kbd>![x](./img/pic-6-invalidate.png)</kbd>
 
 #### 7. The generated home page is now delivering CSS customized for the device type!
 
@@ -96,12 +96,12 @@ https://d123.cloudfront.net/
 
 You should be seeing a page like this:
 
-![x](./img/pic-7-desktop-view.png)
+<kbd>![x](./img/pic-7-desktop-view.png)</kbd>
 
 Go to the distribution home page (from mobile):  
 https://d123.cloudfront.net/
 
 You should be seeing a page like this:
 
-![x](./img/pic-8-mobile-view.png)
+<kbd>![x](./img/pic-8-mobile-view.png)</kbd>
 

@@ -54,13 +54,13 @@ In the `Basic information` window, specify:
 * `Role`: `Choose an existing role`
 * `Existing role`: `ws-lambda-at-edge-read-only-<UNIQUE_ID>` (this role allows the function to read data from the DynamoDB table and get objects from the S3 buckets)
 
-![x](./img/01-create-function.png)
+<kbd>![x](./img/01-create-function.png)</kbd>
 
 Use JavaScript code from [ws-lambda-at-edge-generate-card-page.js](./ws-lambda-at-edge-generate-card-page.js) as a blueprint.
 
 Take a moment to familiarize yourself with the function code and what it does. You will need to replace `FIXME` with the DynamoDB table name and the CloudFront distribution domain name. You can find the resource names in the CloudFormation stack details in CloudFormation Console, or directly in DynamoDB and CloudFront Consoles.
 
-![x](./img/02-function-created.png)
+<kbd>![x](./img/02-function-created.png)</kbd>
 
 #### 1.2 Validate the function works in Lambda Console
 
@@ -68,17 +68,17 @@ Click `Save and Test` and configure the test event. You can use "CloudFront Simp
 
 Specify `/card/da8398f4` as the value of the `uri` field.
 
-![x](./img/03-configure-test-event.png)
+<kbd>![x](./img/03-configure-test-event.png)</kbd>
 
 Click `Test` and validate the function has returned `200` status code and the `body` field contains a meaningful HTML document.
 
-![x](./img/04-test-invoke-successful.png)
+<kbd>![x](./img/04-test-invoke-successful.png)</kbd>
 
 #### 1.3 Publish a function version
 
 Choose `Publish new version` under `Actions`, specify an optional description of a function version and click `Publish`.
 
-![x](./img/05-version-published.png)
+<kbd>![x](./img/05-version-published.png)</kbd>
 
 #### 1.4 Create the trigger
 
@@ -91,11 +91,11 @@ Set the new trigger properties as follows:
 * `CloudFront Event`: choose `Origin Request` event type to trigger the function.
 * Confirm the global replication of the function by clicking `Enable trigger and replicate`
 
-![x](./img/07-create-trigger.png)
+<kbd>![x](./img/07-create-trigger.png)</kbd>
 
 After the trigger has been created, you will see it in the list of triggers of the function version.
 
-![x](./img/08-trigger-created.png)
+<kbd>![x](./img/08-trigger-created.png)</kbd>
 
 #### 1.5 Wait for the change to propagate
 
@@ -108,7 +108,7 @@ https://d123.cloudfront.net/card/da8398f4
 
 You should be seeing a page like this:
 
-![x](./img/09-card-page-generated.png)
+<kbd>![x](./img/09-card-page-generated.png)</kbd>
 
 ### 2. Content generation for the home page
 
@@ -128,7 +128,7 @@ In the `Basic information` window, select:
 
 Use JavaScript code from [ws-lambda-at-edge-generate-home-page.js](./ws-lambda-at-edge-generate-home-page.js) as a blueprint. Take a moment to familiarize yourself with the function code and what it does.
 
-![x](./img/12-function-created.png)
+<kbd>![x](./img/12-function-created.png)</kbd>
 
 #### 2.2 Validate the function works in Lambda Console
 
@@ -136,17 +136,17 @@ Click `Save and Test` and configure the test event. You can use "CloudFront Simp
 
 Specify `/index.html` as the value of the `uri` field.
 
-![x](./img/13-configure-test-event.png)
+<kbd>![x](./img/13-configure-test-event.png)</kbd>
 
 Click `Test` and validate the function has returned `200` status code and the `body` field contains a meaningful HTML document.
 
-![x](./img/14-test-invoke-successful.png)
+<kbd>![x](./img/14-test-invoke-successful.png)</kbd>
 
 #### 2.3 Publish a function version
 
 Choose `Publish new version` under `Actions`, specify an optional description of a function version and click `Publish`.
 
-![x](./img/15-version-published.png)
+<kbd>![x](./img/15-version-published.png)</kbd>
 
 #### 2.4 Create a cache behavior for the home page
 
@@ -159,7 +159,7 @@ Under the `Behaviors` tab, click `Create Behavior`. Choose the following setting
 * Min, Max and Default TTL: 0, 5, 5 respectively (this would cache the generated home page for 5 seconds max)
 * `Lambda Function Associations`: `Origin Request` = `<lambda version ARN from the previous step>`
   
-![x](./img/16-create-cb-and-trigger.png)
+<kbd>![x](./img/16-create-cb-and-trigger.png)</kbd>
 
 #### 2.5 Wait for the change to propagate
 
@@ -171,7 +171,7 @@ CloudFront may have already cached the old version of the home page, let's purge
 
 Go to `Invalidations` tab and create a new invalidation. Specify '/*' as the path to invalidate.
 
-![x](./img/17-invalidate.png)
+<kbd>![x](./img/17-invalidate.png)</kbd>
 
 #### 2.7 The generated home page is now served by CloudFront!
 
@@ -180,4 +180,4 @@ https://d123.cloudfront.net/
 
 You should be seeing a page like this:
 
-![x](./img/18-home-page-generated.png)
+<kbd>![x](./img/18-home-page-generated.png)</kbd>

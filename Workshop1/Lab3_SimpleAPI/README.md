@@ -27,13 +27,13 @@ In the `Basic information` window, specify:
 * `Role`: `Choose an existing role`
 * `Existing role`: `ws-lambda-at-edge-full-access-<UNIQUE_ID>` (this role allows the function to update the DynamoDB table)
 
-![x](./img/01-create-function.png)
+<kbd>![x](./img/01-create-function.png)</kbd>
 
 Use JavaScript code from [ws-lambda-at-edge-api-like.js](./ws-lambda-at-edge-api-like.js) as a blueprint.
 
 Take a moment to familiarize yourself with the function code and what it does. You will need to replace `FIXME` with the DynamoDB table name.
 
-![x](./img/02-function-created.png)
+<kbd>![x](./img/02-function-created.png)</kbd>
 
 ### 2. Validate the function works in Lambda Console
 
@@ -44,17 +44,17 @@ Specify the following request fields:
 * `"querystring": "id=da8398f4"`
 * `"method": "POST"`
 
-![x](./img/03-configure-test-event.png)
+<kbd>![x](./img/03-configure-test-event.png)</kbd>
 
 Click `Test` and validate the function has returned `200` status code and the `body` field contains a meaningful JSON document.
 
-![x](./img/04-test-invoke-successful.png)
+<kbd>![x](./img/04-test-invoke-successful.png)</kbd>
 
 ### 3. Publish a function version
 
 Choose `Publish new version` under `Actions`, specify an optional description of a function version and click `Publish`.
 
-![x](./img/05-version-published.png)
+<kbd>![x](./img/05-version-published.png)</kbd>
 
 ### 4. Create cache behavior for the API URI
 
@@ -67,7 +67,7 @@ Under the `Behaviors` tab, click `Create Behavior`. Choose the following setting
 * `Query String Forwarding and Caching`: `Forward all, cache based on all`
 * `Lambda Function Associations`: `Origin Request` = `<lambda version ARN from the previous step>`
   
-![x](./img/06-create-cb-and-trigger.png)
+<kbd>![x](./img/06-create-cb-and-trigger.png)</kbd>
 
 Wait for ~30-60 seconds for the change to propagate and for the Lambda function to get globally replicated.
 
@@ -77,7 +77,7 @@ CloudFront may have already cached the error response code if you tried to click
 
 Go to `Invalidations` tab and create a new invalidation. Specify '/*' as the path to invalidate.
 
-![x](./img/07-invalidate.png)
+<kbd>![x](./img/07-invalidate.png)</kbd>
 
 ### 6. The API works now!
 
@@ -93,12 +93,12 @@ curl -X POST https://d123.cloudfront.net/api/like?id=da8398f4
 ```
 Or simple go to https://d123.cloudfront.net/card/da8398f4 in your web browser and click "+1"
 
-![x](./img/08-api-works-1.png)
+<kbd>![x](./img/08-api-works-1.png)</kbd>
 
 becomes:
 
-![x](./img/09-api-works-2.png)
+<kbd>![x](./img/09-api-works-2.png)</kbd>
 
 The home page should also now reflect the change and list the cards according to their rating:
 
-![x](./img/10-api-works-3.png)
+<kbd>![x](./img/10-api-works-3.png)</kbd>

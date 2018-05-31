@@ -29,7 +29,7 @@ Go to https://observatory.mozilla.org/ and scan the CloudFront distribution doma
 
 The result of the scan will be unsatisfactory:
 
-![x](./img/00-scan-bad-security.png)
+<kbd>![x](./img/00-scan-bad-security.png)</kbd>
 
 ### 2. Create a Lambda function
 
@@ -42,13 +42,13 @@ In the `Basic information` window, specify:
 * Role: `Choose an existing role`
 * Existing role: `ws-lambda-at-edge-basic-<UNIQUE_ID>` (this allows the function to push the logs to CloudWatch Logs)
 
-![x](./img/01-create-function.png)
+<kbd>![x](./img/01-create-function.png)</kbd>
 
 Use JavaScript code from [ws-lambda-at-edge-add-security-headers.js](./ws-lambda-at-edge-add-security-headers.js) as a blueprint.
 
 Take a moment to familiarize yourself with the function code and what it does.
 
-![x](./img/02-function-createed.png)
+<kbd>![x](./img/02-function-createed.png)</kbd>
 
 ### 3. Validate the function works in Lambda Console
 
@@ -56,12 +56,12 @@ When the function is created and is ready to be associated with a CloudFront dis
 
 You will be prompted with a window that allows you to create a test event - an input for your function. Use the event template called "CloudFront Modify Response Header".
 
-![x](./img/03-configure-test-event.png)
+<kbd>![x](./img/03-configure-test-event.png)</kbd>
 
 Now the function can be tested with the configured test event. Click `Test`.
 Validate that the security headers are now seen in the the execution result of the test invocation.
 
-![x](./img/04-test-invoke-successful.png)
+<kbd>![x](./img/04-test-invoke-successful.png)</kbd>
 
 ### 4. Publish a function version
 
@@ -69,11 +69,11 @@ Before a Lambda function can be associated with and triggered by a CloudFront di
 
 Choose `Publish new version` under `Actions`, specify an optional description of a function version and click `Publish`.
 
-![x](./img/05-publish-new-version.png)
+<kbd>![x](./img/05-publish-new-version.png)</kbd>
 
 Now you have a published function version ARN.
 
-![x](./img/06-new-version-published.png)
+<kbd>![x](./img/06-new-version-published.png)</kbd>
 
 ### 5. Create the trigger
 
@@ -81,7 +81,7 @@ The next step is to configure a CloudFront distribution to trigger the Lambda fu
 
 While we are at the Lambda Console, choose `Add trigger` under `Triggers`, you will be presented with an `Add trigger` window. Click on the empty box and select `CloudFront` in the dropdown list of AWS services.
 
-![x](./img/07-add-trigger-0.png)
+<kbd>![x](./img/07-add-trigger-0.png)</kbd>
 
 Set the new trigger properties as follows:
 
@@ -90,11 +90,11 @@ Set the new trigger properties as follows:
 * `CloudFront Event`: choose `Origin Response` event type to trigger the function. We want to add the security headers every time we receive a response from the origin so that the modified response would be cached together with the added security headers in the CloudFront cache.
 * Confirm the global replication of the function by clicking `Enable trigger and replicate`
 
-![x](./img/07-add-trigger-1.png)
+<kbd>![x](./img/07-add-trigger-1.png)</kbd>
 
 After the trigger has been created, you will see it in the list of triggers of the function version.
 
-![x](./img/08-trigger-created.png)
+<kbd>![x](./img/08-trigger-created.png)</kbd>
 
 ### 6. Configure HTTP to HTTPs redirect
 
@@ -104,7 +104,7 @@ Open CloudFront Console and find the distribution created for this workshop. Nav
 * Set `Viewer Protocol Policy` to `Redirect HTTP to HTTPs`
 * You can also see the Lambda function ARN here configured for `Origin Response` event type in the previous step. No action needed. This is just another way to configure the trigger association in CloudFront Console.
 
-![x](./img/09-edit-cb.png)
+<kbd>![x](./img/09-edit-cb.png)</kbd>
 
 ### 7. Wait for the change to propagate
 
@@ -114,7 +114,7 @@ After any modification of a CloudFront distribution, the change propagates globa
 
 In order to purge any objects that may have been cached without the security headers, submit a wildcard invalidation '/*'.
 
-![x](./img/10-invalidate.png)
+<kbd>![x](./img/10-invalidate.png)</kbd>
 
 ### 9. Validate the security headers are now seen in the HTTP responses
 
@@ -138,6 +138,6 @@ Rescan the distribution domain name with https://observatory.mozilla.org/ simila
 
 Congratulations, now you have 100/100 score! :)
 
-![x](./img/11-scan-security-good-1.png)
+<kbd>![x](./img/11-scan-security-good-1.png)</kbd>
 
-![x](./img/12-scan-security-goog-2.png)
+<kbd>![x](./img/12-scan-security-goog-2.png)</kbd>
