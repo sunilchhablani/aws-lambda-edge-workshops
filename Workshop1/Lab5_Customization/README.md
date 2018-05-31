@@ -29,7 +29,7 @@ can be rewritten to
 [4. Create a new cache behavior for the CSS files](#4-create-a-new-cache-behavior-for-the-css-files)  
 [5. Wait for the change to propagate](#5-wait-for-the-change-to-propagate)  
 [6. Invalidate CloudFront cache](#6-invalidate-cloudfront-cache)  
-[7. The generated home page is now delivering CSS customized for the device type!](#7-the-generated-home-page-is-now-delivering-css-customized-for-the-device-type)  
+[7. The generated home page is now delivering CSS customized for the device type!](#7-the-generated-home-page-is-now-delivering-css-customized-for-the-device-type)
 
 #### 1. Create a Lambda function
 
