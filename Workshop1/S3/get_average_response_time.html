@@ -25,6 +25,7 @@ $(document).ready(function(){
   }
 
   async function printTimeTaken() {
+    await sleep(1200);
     for (var i = 0; i < 10; i++) {
       var startTime= new Date().getTime();
 
@@ -33,9 +34,9 @@ $(document).ready(function(){
           totalTime += timeTaken[i];
           $("#time_results").append("Request No. <b>" + (i+1) +"</b>, TimeTaken: <b>" + timeTaken[i] + " ms</b><br>");
       });
-      await sleep(1300);
+      await sleep(1200);
     }
-    $("#time_results").append("================================<br>Average Response Time: <b>" + totalTime/timeTaken.length + " ms<b><br>================================<br>");
+    $("#time_results").append("================================<br>Average Response Time: <b>" + totalTime/timeTaken.length + " ms</b><br>================================<br>");
   }
 
   printTimeTaken();

@@ -31,7 +31,7 @@ can be rewritten to
 [6. Invalidate CloudFront cache](#6-invalidate-cloudfront-cache)  
 [7. The generated home page is now delivering CSS customized for the device type!](#7-the-generated-home-page-is-now-delivering-css-customized-for-the-device-type)
 
-#### 1. Create a Lambda function
+### 1. Create a Lambda function
 
 Go to Lambda Console, select "US East (N.Virginia)" region in the top left corner. Go to `Functions`, click `Create function` and click `Author from scratch`.
 
@@ -48,7 +48,7 @@ Take a moment to familiarize yourself with the function code and what it does.
 
 <kbd>![x](./img/pic-1-create-function-customize-css2.png)</kbd>
 
-#### 2. Validate the function works in Lambda Console
+### 2. Validate the function works in Lambda Console
 
 Click "Save and test" and configure the test event. Use the test event from [ws-lambda-at-edge-customize-css-test-event.json](./ws-lambda-at-edge-customize-css-test-event.json). Set the `uri` value to `css/style.css`.
 
@@ -58,13 +58,13 @@ Click `Test` and validate the function has returned `200` status code and the `u
 
 <kbd>![x](./img/pic-3-test-invoke-customize-css.png)</kbd>
 
-#### 3. Publish a function version
+### 3. Publish a function version
 
 Choose `Publish new version` under `Actions`, specify an optional description of a function version and click `Publish`.
 
 <kbd>![x](./img/pic-4-publish-function-version.png)</kbd>
 
-#### 4. Create a new cache behavior for the CSS files
+### 4. Create a new cache behavior for the CSS files
 
 Go to CloudFront Console and find the distribution created for this workshop.
 
@@ -79,17 +79,17 @@ Click `Create`.
 
 <kbd>![x](./img/pic-5-create-new-cachebehavior.png)</kbd>
 
-#### 5. Wait for the change to propagate
+### 5. Wait for the change to propagate
 
 Wait for ~30-60 seconds for the change to propagate and for the Lambda function to get globally replicated.
 
-#### 6. Invalidate CloudFront cache
+### 6. Invalidate CloudFront cache
 
 CloudFront may have already cached the old version css, let's purge any stale objects from the cache. Submit a wildcard invalidation `/*`.
 
 <kbd>![x](./img/pic-6-invalidate.png)</kbd>
 
-#### 7. The generated home page is now delivering CSS customized for the device type!
+### 7. The generated home page is now delivering CSS customized for the device type!
 
 Go to the distribution home page (from desktop):  
 https://d123.cloudfront.net/
