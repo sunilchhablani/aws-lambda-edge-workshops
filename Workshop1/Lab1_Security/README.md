@@ -37,9 +37,10 @@ Create a Lambda function that would add the security headers to all responses fr
 Go to Lambda Console, select "US East (N.Virginia)" region in the top left corner. Go to `Functions`, click `Create function` and click `Author from scratch`.
 
 In the `Basic information` window, specify:
-* Name: `ws-lambda-at-edge-add-security-headers`
-* Role: `Choose an existing role`
-* Existing role: `ws-lambda-at-edge-basic-<UNIQUE_ID>` (this allows the function to push the logs to CloudWatch Logs)
+* `Name`: `ws-lambda-at-edge-add-security-headers`
+* `Runtime`: `Node.js 6.10` or `Node.js 8.10`
+* `Role`: `Choose an existing role`
+* `Existing role`: `ws-lambda-at-edge-basic-<UNIQUE_ID>` (this allows the function to push the logs to CloudWatch Logs)
 
 <kbd>![x](./img/01-create-function.png)</kbd>
 

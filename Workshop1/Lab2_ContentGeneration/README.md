@@ -50,6 +50,7 @@ Go to Lambda Console, select "US East (N.Virginia)" region in the top left corne
 
 In the `Basic information` window, specify:
 * `Name`: `ws-lambda-at-edge-generate-card-page`
+* `Runtime`: `Node.js 6.10` or `Node.js 8.10`
 * `Role`: `Choose an existing role`
 * `Existing role`: `ws-lambda-at-edge-read-only-<UNIQUE_ID>` (this role allows the function to read data from the DynamoDB table and get objects from the S3 buckets)
 
@@ -122,6 +123,7 @@ Create a Lambda function similar to the previous one.
 
 In the `Basic information` window, select:
 * `Name`: `ws-lambda-at-edge-generate-home-page`
+* `Runtime`: `Node.js 6.10` or `Node.js 8.10`
 * `Role`: `Choose an existing role`
 * `Existing role`: `ws-lambda-at-edge-read-only-<UNIQUE_ID>` (this role allows the function to read data from the DynamoDB table and get objects from the S3 buckets)
 

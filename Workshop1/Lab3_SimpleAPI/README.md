@@ -23,6 +23,7 @@ Similar to how we did it in the previous labs, create a Lambda function in t"US 
 
 In the `Basic information` window, specify:
 * `Name`: `ws-lambda-at-edge-api-like`
+* `Runtime`: `Node.js 6.10` or `Node.js 8.10`
 * `Role`: `Choose an existing role`
 * `Existing role`: `ws-lambda-at-edge-full-access-<UNIQUE_ID>` (this role allows the function to update the DynamoDB table)
 

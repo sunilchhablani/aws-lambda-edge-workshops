@@ -36,6 +36,7 @@ Go to Lambda Console, select "US East (N.Virginia)" region in the top left corne
 
 In the `Basic information` window, select:
 * `Name`: `ws-lambda-at-edge-customize-css`
+* `Runtime`: `Node.js 6.10` or `Node.js 8.10`
 * `Role`: `Choose an existing role`
 * `Existing role`: `ws-lambda-at-edge-basic-<UNIQUE_ID>` (this allows the function to push the logs to CloudWatch Logs)
 
