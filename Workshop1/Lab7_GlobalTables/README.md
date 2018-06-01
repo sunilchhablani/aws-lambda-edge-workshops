@@ -4,9 +4,9 @@ Amazon DynamoDB Global Tables provide a fully managed, multi-region, and multi-m
 
 **NOTE:** Here and below throughout the workshop, replace the example domain name `d123.cloudfront.net` with the unique name of your distribution.
 
-As part of CloudFormation stack creation, DynamoDB global tables were created in "EU (Frakfurt) and US West (Oregon)". Currently homepage card details are being read from DynamoDB table in "EU (Frakfurt)" region.
+As part of CloudFormation stack creation, DynamoDB global tables were created in "EU (Frakfurt)" and "US West (Oregon)" regions. Currently homepage card details are being read from DynamoDB table in "EU (Frakfurt)" region.
 
-As part of this lab, you will modify an existing lambda function `ws-lambda-at-edge-generate-home-page.js` to inspect `CloudFront-Viewer-Country` header, set by Cloudfront, to find the country of the viewer and if the viewer is located in United States or Canada, DynamoDB region is updated to "US West (Oregon)". On completion of this lab, depending upon viewer country of the users of this lab, average homepage load time might change. For users in US and Canada, since "US West (Oregon)" is nearer than "EU (Frakfurt)", the average homepage load time should be considerably lesser.
+As part of this lab, you will modify an existing lambda function `ws-lambda-at-edge-generate-home-page.js` to inspect `CloudFront-Viewer-Country` header, set by Cloudfront, to find the country of the viewer and if the viewer is located in United States or Canada, DynamoDB region is updated to "US West (Oregon)". On completion of this lab, depending upon viewer country of the users of this lab, average homepage load time might change. For example, for users in US and Canada, since "US West (Oregon)" is nearer than "EU (Frakfurt)", the average homepage load time should be considerably lesser.
 
 ## Steps
 
