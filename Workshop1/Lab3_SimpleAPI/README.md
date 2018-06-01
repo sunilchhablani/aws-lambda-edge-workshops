@@ -15,8 +15,7 @@ POST /api/like?id=<card_id>
 [2. Validate the function works in Lambda Console](#2-validate-the-function-works-in-lambda-console)  
 [3. Publish a function version](#3-publish-a-function-version)  
 [4. Create cache behavior for the API URI](#4-create-cache-behavior-for-the-api-uri)  
-[5. Invalidate CloudFront cache](#5-invalidate-cloudfront-cache)  
-[6. The API works now!](#6-the-api-works-now)  
+[5. The API works now!](#6-the-api-works-now)  
 
 ### 1. Create a Lambda function
 
@@ -71,15 +70,7 @@ Under the `Behaviors` tab, click `Create Behavior`. Choose the following setting
 
 Wait for ~30-60 seconds for the change to propagate and for the Lambda function to get globally replicated.
 
-### 5. Invalidate CloudFront cache
-
-CloudFront may have already cached the error response code if you tried to click "+1" before implementing the API.
-
-Go to `Invalidations` tab and create a new invalidation. Specify '/*' as the path to invalidate.
-
-<kbd>![x](./img/07-invalidate.png)</kbd>
-
-### 6. The API works now!
+### 5. The API works now!
 
 You can validate it with either a command line:
 

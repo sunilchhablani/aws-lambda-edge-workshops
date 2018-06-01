@@ -77,19 +77,13 @@ Click `Yes, Edit`
 
 Wait for ~30-60 seconds for the change to propagate and for the Lambda function to get globally replicated.
 
-#### 8 Invalidate CloudFront cache
-
-CloudFront may have already cached the old version homepage, let's purge any stale objects from the cache. Submit a wildcard invalidation '/*'.
-
-<kbd>![x](./img/invalidate.png)</kbd>
-
-#### 9 Verify change in average homepage load time
+#### 8 Verify change in average homepage load time
 
 Again open [https://d123.cloudfront.net/get_average_home_page_load_time.html](https://d123.cloudfront.net/get_average_home_page_load_time.html) to send few requests to generate content for homepage by reading card details from DynamoDB table in region nearer to country of the viewer and calculate the average homepage load time. For users in US and CA, the average load time should now be considerably lesser as compared against fetching card details from DynamoDB table in "EU (Frakfurt)" region.
 
 <kbd>![x](./img/get-updated-average-home-page-load-time.png)</kbd>
 
-#### 10 Update cache behavior to allow object caching
+#### 9 Update cache behavior to allow object caching
 
 In step 1, we had disabled object caching for homepage content generation by setting TTL to 0 to demonstrate how DynamoDB global table and Lambda@Edge can further reduce latencies based on `CloudFront-Viewer-Country` header. Let's change back the TTL setting to default so as to enable object caching again.
 

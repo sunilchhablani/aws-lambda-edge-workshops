@@ -37,8 +37,7 @@ We will generate the content in Lambda functions triggered by origin-request eve
 [2.3 Publish a function version](#23-publish-a-function-version)  
 [2.4 Create a cache behavior for the home page](#24-create-a-cache-behavior-for-the-home-page)  
 [2.5 Wait for the change to propagate](#25-wait-for-the-change-to-propagate)  
-[2.6 Invalidate CloudFront cache](#26-invalidate-cloudfront-cache)  
-[2.7 The generated home page is now served by CloudFront!](#27-the-generated-home-page-is-now-served-by-cloudfront)  
+[2.6 The generated home page is now served by CloudFront!](#27-the-generated-home-page-is-now-served-by-cloudfront)  
 
 ### 1. Content generation for the card details page
 
@@ -165,15 +164,7 @@ Under the `Behaviors` tab, click `Create Behavior`. Choose the following setting
 
 After any modification of a CloudFront distribution, the change propagates globally to all CloudFront edge locations. The propagation status is indicated as `In Progress` and `Deployed` when it's complete. Usually ~30-60seconds is enough for the change to take effect, even though the status may be still `In Progress`. To be 100% certain though you can wait until the change is fully deployed, but it's not needed for the purpose of the workshop.
 
-#### 2.6 Invalidate CloudFront cache
-
-CloudFront may have already cached the old version of the home page, let's purge any stale objects from the cache.
-
-Go to `Invalidations` tab and create a new invalidation. Specify '/*' as the path to invalidate.
-
-<kbd>![x](./img/17-invalidate.png)</kbd>
-
-#### 2.7 The generated home page is now served by CloudFront!
+#### 2.6 The generated home page is now served by CloudFront!
 
 Go to the home page:  
 https://d123.cloudfront.net/  

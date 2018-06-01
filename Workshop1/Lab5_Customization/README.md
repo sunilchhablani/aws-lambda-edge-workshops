@@ -28,8 +28,7 @@ can be rewritten to
 [3. Publish a function version](#3-publish-a-function-version)  
 [4. Create a new cache behavior for the CSS files](#4-create-a-new-cache-behavior-for-the-css-files)  
 [5. Wait for the change to propagate](#5-wait-for-the-change-to-propagate)  
-[6. Invalidate CloudFront cache](#6-invalidate-cloudfront-cache)  
-[7. The generated home page is now delivering CSS customized for the device type!](#7-the-generated-home-page-is-now-delivering-css-customized-for-the-device-type)
+[6. The generated home page is now delivering CSS customized for the device type!](#7-the-generated-home-page-is-now-delivering-css-customized-for-the-device-type)
 
 ### 1. Create a Lambda function
 
@@ -83,13 +82,7 @@ Click `Create`.
 
 Wait for ~30-60 seconds for the change to propagate and for the Lambda function to get globally replicated.
 
-### 6. Invalidate CloudFront cache
-
-CloudFront may have already cached the old version css, let's purge any stale objects from the cache. Submit a wildcard invalidation `/*`.
-
-<kbd>![x](./img/pic-6-invalidate.png)</kbd>
-
-### 7. The generated home page is now delivering CSS customized for the device type!
+### 6. The generated home page is now delivering CSS customized for the device type!
 
 Go to the distribution home page (from desktop):  
 https://d123.cloudfront.net/
