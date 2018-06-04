@@ -67,13 +67,13 @@ Learn how to serve content customized for the device type of a viewer.
 
 Learn how to dynamically change origin to serve content from origin nearer to country of the viewer.
 
-[Lab 6 - Dynamic Origin Selection](./Lab5_DynamicOriginSelection/README.md)
+[Lab 6 - Dynamic Origin Selection](./Lab6_DynamicOriginSelection/README.md)
 
 ## Lab 5 - Global Tables
 
 Learn how to serve data from DynamoDB table from region nearer to country of the viewer.
 
-[Lab 7 - Global Tables](./Lab5_GlobalTables/README.md)
+[Lab 7 - Global Tables](./Lab7_GlobalTables/README.md)
 
 ## Cleanup
 
