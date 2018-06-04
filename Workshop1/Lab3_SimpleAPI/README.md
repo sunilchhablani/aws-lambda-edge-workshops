@@ -37,7 +37,7 @@ Take a moment to familiarize yourself with the function code and what it does. Y
 
 ### 2. Validate the function works in Lambda Console
 
-Click `Save and Test` and configure the test event. You can use the "CloudFront Simple Remote Call" event template. 
+Click `Save` and configure the test event. You can use the "CloudFront Simple Remote Call" event template. 
 
 Specify the following request fields:
 * `"uri": "/api/like"`
