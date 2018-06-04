@@ -52,7 +52,7 @@ Take a moment to familiarize yourself with the function code and what it does.
 
 ### 3. Validate the function works in Lambda Console
 
-When the function is created and is ready to be associated with a CloudFront distribution, it's highly recommended to first test it to make sure it executes successfully and produces the expected outcome. This can be done using a test invoke in Lambda Console. Click `Save and test`.
+When the function is created and is ready to be associated with a CloudFront distribution, it's highly recommended to first test it to make sure it executes successfully and produces the expected outcome. This can be done using a test invoke in Lambda Console. Click `Save` and then `Test`.
 
 You will be prompted with a window that allows you to create a test event - an input for your function. Use the event template called "CloudFront Modify Response Header".
 
@@ -88,7 +88,8 @@ Set the new trigger properties as follows:
 * `Distribution ID`: find the CloudFront distribution created for this workshop  
 * `Cache Behavior`: choose the default cache behavior, that is currently the only behavior in the distribution that matches all URI paths with the `*` wildcard.  
 * `CloudFront Event`: choose `Origin Response` event type to trigger the function. We want to add the security headers every time we receive a response from the origin so that the modified response would be cached together with the added security headers in the CloudFront cache.
-* Confirm the global replication of the function by clicking `Enable trigger and replicate`
+* Confirm the global replication of the function by clicking `Enable trigger and replicate`.
+* Click `Add` and then `Save`.
 
 <kbd>![x](./img/07-add-trigger-1.png)</kbd>
 

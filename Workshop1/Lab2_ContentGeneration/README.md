@@ -64,7 +64,7 @@ Take a moment to familiarize yourself with the function code and what it does. Y
 
 #### 1.2 Validate the function works in Lambda Console
 
-Click `Save and Test` and configure the test event. You can use "CloudFront Simple Remote Call" event template. 
+Click `Save` and configure the test event. You can use "CloudFront Simple Remote Call" event template. 
 
 Specify `/card/da8398f4` as the value of the `uri` field.
 
@@ -82,16 +82,21 @@ Choose `Publish new version` under `Actions`, specify an optional description of
 
 #### 1.4 Create the trigger
 
-Choose `Add trigger` under `Triggers`, you will be presented with an `Add trigger` dialog.
+Under `Configuration`, select `CloudFront` from the dropdown list of AWS services, you will be presented with a `Configure triggers`. 
 
 Set the new trigger properties as follows:
 
 * `Distribution ID`: find the CloudFront distribution created for this workshop  
 * `Cache Behavior`: choose the default cache behavior, that is currently the only behavior in the distribution that matches all URI paths with the `*` wildcard.  
 * `CloudFront Event`: choose `Origin Request` event type to trigger the function.
-* Confirm the global replication of the function by clicking `Enable trigger and replicate`
+* Confirm the global replication of the function by clicking `Enable trigger and replicate`.
+* Click `Add` and then `Save`.
 
 <kbd>![x](./img/07-create-trigger.png)</kbd>
+
+<kbd>![x](./img/07-create-trigger1.png)</kbd>
+
+<kbd>![x](./img/07-create-trigger2.png)</kbd>
 
 After the trigger has been created, you will see it in the list of triggers of the function version.
 
@@ -133,7 +138,7 @@ Use JavaScript code from [ws-lambda-at-edge-generate-home-page.js](./ws-lambda-a
 
 #### 2.2 Validate the function works in Lambda Console
 
-Click `Save and Test` and configure the test event. You can use "CloudFront Simple Remote Call" event template.
+Click `Save` and then `Test` and configure the test event. You can use "CloudFront Simple Remote Call" event template.
 
 Specify `/index.html` as the value of the `uri` field.
 
