@@ -82,3 +82,10 @@ Learn how to serve data from DynamoDB table from region nearer to country of the
 3. Delete all versions of all files from S3 bucket `ws-lambda-at-edge-us-<unique_id>` by clicking on `Show` for versions and selecting all files to delete.
 4. Delete all versions of all files from S3 bucket `ws-lambda-at-edge-eu-<unique_id>` by clicking on `Show` for versions and selecting all files to delete.
 5. Delete the CloudFormation stack named `WsLambdaAtEdgeAlienCards` in "US West (Oregon)" region.
+
+## More Use Cases
+Interested in exploring more use cases that Lambda@Edge supports? Check this out.
+
+1. [Resizing Images with Amazon CloudFront & Lambda@Edge](https://aws.amazon.com/blogs/networking-and-content-delivery/resizing-images-with-amazon-cloudfront-lambdaedge-aws-cdn-blog/)
+
+2. [Authorization@Edge – How to Use Lambda@Edge and JSON Web Tokens to Enhance Web Application Security](https://aws.amazon.com/blogs/networking-and-content-delivery/authorizationedge-how-to-use-lambdaedge-and-json-web-tokens-to-enhance-web-application-security/)
