@@ -50,7 +50,7 @@ Take a moment to familiarize yourself with the function code and what it does.
 
 ### 2. Validate the function works in Lambda Console
 
-Click "Save and test" and configure the test event. Use the test event from [ws-lambda-at-edge-customize-css-test-event.json](./ws-lambda-at-edge-customize-css-test-event.json). Set the `uri` value to `css/style.css`.
+Click `Save` and then `Test` and configure the test event. Use the test event from [ws-lambda-at-edge-customize-css-test-event.json](./ws-lambda-at-edge-customize-css-test-event.json). Set the `uri` value to `css/style.css`.
 
 <kbd>![x](./img/pic-2-configure-test-event.png)</kbd>
 
