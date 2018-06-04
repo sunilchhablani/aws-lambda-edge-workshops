@@ -79,7 +79,7 @@ Now you have a published function version ARN.
 
 The next step is to configure a CloudFront distribution to trigger the Lambda function execution on one of the four event types. This can be done in both Lambda or CloudFront Consoles.
 
-While we are at the Lambda Console, choose `Add trigger` under `Triggers`, you will be presented with an `Add trigger` window. Click on the empty box and select `CloudFront` in the dropdown list of AWS services.
+While we are at the Lambda Console, under `Configuration` select `CloudFront` from the dropdown list of AWS services, you will be presented with a `Configure triggers`. 
 
 <kbd>![x](./img/07-add-trigger-0.png)</kbd>
 
@@ -91,6 +91,8 @@ Set the new trigger properties as follows:
 * Confirm the global replication of the function by clicking `Enable trigger and replicate`
 
 <kbd>![x](./img/07-add-trigger-1.png)</kbd>
+
+<kbd>![x](./img/07-add-trigger-2.png)</kbd>
 
 After the trigger has been created, you will see it in the list of triggers of the function version.
 
