@@ -63,7 +63,7 @@ Take a moment to familiarize yourself with the function code and what it does.
 
 #### 1.2 Validate the function works in Lambda Console
 
-Click `Save and test` and configure the test event. You can use "CloudFront Simple Remote Call" event template. 
+Click `Save` and then `Test` and configure the test event. You can use "CloudFront Simple Remote Call" event template. 
 
 Specify `/r/tree` as the value of the `uri` field.
 
