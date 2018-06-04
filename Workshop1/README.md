@@ -63,6 +63,18 @@ Learn how to serve content customized for the device type of a viewer.
 
 [Lab 5 - Customization](./Lab5_Customization/README.md)
 
+## Lab 6 - Dynamic Origin Selection
+
+Learn how to dynamically change origin to serve content from origin nearer to country of the viewer.
+
+[Lab 6 - Dynamic Origin Selection](./Lab5_DynamicOriginSelection/README.md)
+
+## Lab 5 - Global Tables
+
+Learn how to serve data from DynamoDB table from region nearer to country of the viewer.
+
+[Lab 7 - Global Tables](./Lab5_GlobalTables/README.md)
+
 ## Cleanup
 
 1. Delete DynamoDB table `AlienCards-<unique_id>`  in "EU (Frankfurt)" region.
