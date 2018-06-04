@@ -42,7 +42,7 @@ Click `Create`
 
 ### 2. Get average time to fetch an image from an S3 origin
 
-Open [https://d123.cloudfront.net/get_average_time_taken.html](https://d123.cloudfront.net/get_average_time_taken.html) to send few requests to fetch an image from an S3 origin and get the average response time. Make a note of this resultant average response time.
+Open [https://d123.cloudfront.net/get_average_response_time.html](https://d123.cloudfront.net/get_average_response_time.html) to send few requests to fetch an image from an S3 origin and get the average response time. Make a note of this resultant average response time.
 
 <kbd>![x](./img/get-average-response-time.png)</kbd>
 

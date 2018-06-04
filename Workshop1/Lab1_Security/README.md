@@ -54,7 +54,7 @@ Take a moment to familiarize yourself with the function code and what it does.
 
 When the function is created and is ready to be associated with a CloudFront distribution, it's highly recommended to first test it to make sure it executes successfully and produces the expected outcome. This can be done using a test invoke in Lambda Console. Click `Save` and then `Test`.
 
-You will be prompted with a window that allows you to create a test event - an input for your function. Use the event template called "CloudFront Modify Response Header".
+You will be prompted with a window that allows you to create a test event - an input for your function. Use the event template called `CloudFront Modify Response Header`.
 
 <kbd>![x](./img/03-configure-test-event.png)</kbd>
 
