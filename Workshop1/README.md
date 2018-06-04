@@ -71,7 +71,7 @@ Learn how to dynamically change origin to serve content from origin nearer to co
 
 ## Lab 7 - Global Tables
 
-Learn how to serve data from DynamoDB table from region nearer to country of the viewer.
+Learn how to serve data from DynamoDB table in region nearer to country of the viewer.
 
 [Lab 7 - Global Tables](./Lab7_GlobalTables/README.md)
 
