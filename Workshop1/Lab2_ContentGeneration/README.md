@@ -134,6 +134,8 @@ In the `Basic information` window, select:
 
 Use JavaScript code from [ws-lambda-at-edge-generate-home-page.js](./ws-lambda-at-edge-generate-home-page.js) as a blueprint. Take a moment to familiarize yourself with the function code and what it does.
 
+<kbd>![x](./img/12-create-function.png)</kbd>
+
 <kbd>![x](./img/12-function-created.png)</kbd>
 
 #### 2.2 Validate the function works in Lambda Console
