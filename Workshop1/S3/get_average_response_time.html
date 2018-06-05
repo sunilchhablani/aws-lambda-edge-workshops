@@ -25,16 +25,16 @@ $(document).ready(function(){
   }
 
   async function printTimeTaken() {
-    await sleep(1200);
     for (var i = 0; i < 10; i++) {
       var startTime= new Date().getTime();
+      var sleepTime = i === 0 ? 2500 : 1200;
 
       $.get("/card/960w/da8398f4.jpg").done(function(){
           timeTaken[i] = (new Date().getTime() - startTime);
           totalTime += timeTaken[i];
           $("#time_results").append("Request No. <b>" + (i+1) +"</b>, TimeTaken: <b>" + timeTaken[i] + " ms</b><br>");
       });
-      await sleep(1200);
+      await sleep(sleepTime);
     }
     $("#time_results").append("================================<br>Average Response Time: <b>" + totalTime/timeTaken.length + " ms</b><br>================================<br>");
   }
