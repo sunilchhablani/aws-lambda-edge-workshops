@@ -64,7 +64,7 @@ Use JavaScript code from [ws-lambda-at-edge-select-nearer-origin.js](./ws-lambda
 
 ### 4. Validate the function works in Lambda Console
 
-Click `Save and Test` and configure the test event. Create new test event and use [ws-lambda-at-edge-select-nearer-origin-test-input.json](./ws-lambda-at-edge-select-nearer-origin-test-input.json) as a test input.
+Click `Save` and then `Test` and configure the test event. Create new test event and use [ws-lambda-at-edge-select-nearer-origin-test-input.json](./ws-lambda-at-edge-select-nearer-origin-test-input.json) as a test input.
 
 <kbd>![x](./img/configure-test-event.png)</kbd>
 
@@ -100,7 +100,7 @@ Wait for ~30-60 seconds for the change to propagate and for the Lambda function 
 
 ### 8. Verify change in average time to fetch an image from S3 origin
 
-Again open [https://d123.cloudfront.net/get_average_home_page_load_time.html](https://d123.cloudfront.net/get_average_time_taken.html) to send few requests to fetch an image from an S3 origin and get the average response time. For users in US and CA, the average response time should now be considerably lesser as compared against fetching an image from an S3 bucket in "EU (Frakfurt)" region.
+Again open [https://d123.cloudfront.net/get_average_response_time.html](https://d123.cloudfront.net/get_average_response_time.html) to send few requests to fetch an image from an S3 origin and get the average response time. For users in US and CA, the average response time should now be considerably lesser as compared against fetching an image from an S3 bucket in "EU (Frakfurt)" region.
 
 <kbd>![x](./img/get-updated-average-response-time.png)</kbd>
 
