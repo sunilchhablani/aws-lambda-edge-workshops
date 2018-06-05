@@ -64,7 +64,7 @@ Take a moment to familiarize yourself with the function code and what it does. Y
 
 #### 1.2 Validate the function works in Lambda Console
 
-Click `Save` and configure the test event. You can use "CloudFront Simple Remote Call" event template. 
+Click `Save` and configure the test event. You can use `CloudFront Simple Remote Call` event template. 
 
 Specify `/card/da8398f4` as the value of the `uri` field.
 
@@ -140,7 +140,7 @@ Use JavaScript code from [ws-lambda-at-edge-generate-home-page.js](./ws-lambda-a
 
 #### 2.2 Validate the function works in Lambda Console
 
-Click `Save` and then `Test` and configure the test event. You can use "CloudFront Simple Remote Call" event template.
+Click `Save` and then `Test` and configure the test event. You can use `CloudFront Simple Remote Call` event template.
 
 Specify `/index.html` as the value of the `uri` field.
 
