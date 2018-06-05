@@ -25,7 +25,6 @@ $(document).ready(function(){
   }
 
   async function printTimeTaken() {
-    await sleep(2200);
     for (var i = 0; i < 10; i++) {
       var startTime= new Date().getTime();
       var sleepTime = i === 0 ? 4500 : 2200;
