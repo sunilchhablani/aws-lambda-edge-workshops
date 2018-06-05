@@ -28,7 +28,7 @@ $(document).ready(function(){
     await sleep(2200);
     for (var i = 0; i < 10; i++) {
       var startTime= new Date().getTime();
-      var sleepTime = i === 0 ? 4000 : 2200;
+      var sleepTime = i === 0 ? 4500 : 2200;
 
       $.get("/index.html").done(function(){
           timeTaken[i] = (new Date().getTime() - startTime);
