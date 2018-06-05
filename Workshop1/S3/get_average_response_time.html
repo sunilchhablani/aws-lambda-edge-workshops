@@ -27,7 +27,7 @@ $(document).ready(function(){
   async function printTimeTaken() {
     for (var i = 0; i < 10; i++) {
       var startTime= new Date().getTime();
-      var sleepTime = i === 0 ? 2500 : 1200;
+      var sleepTime = i === 0 ? 3200 : 1200;
 
       $.get("/card/960w/da8398f4.jpg").done(function(){
           timeTaken[i] = (new Date().getTime() - startTime);

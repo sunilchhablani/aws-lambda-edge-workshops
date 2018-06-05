@@ -40,7 +40,7 @@ function isViewerBelongsToNorthAmerica(request) {
     return isViewerBelongsToNorthAmerica;
 }
 
-function updateS3Origin() {
+function updateS3Origin(request) {
     const bucketName = regionToBucketMapping[region];
     const domainName = `${bucketName}.s3.${region}.amazonaws.com`;
 
