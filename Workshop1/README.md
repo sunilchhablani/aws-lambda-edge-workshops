@@ -75,6 +75,12 @@ Learn how to access data from DynamoDB table in region nearer to the country of 
 
 [Lab 7 - Global Tables](./Lab7_GlobalTables/README.md)
 
+## Cleanup
+
+Clean your resources created for this workshop
+
+[Cleanup](./Cleanup/README.md)
+
 ## More Use Cases
 Interested in exploring more use cases that Lambda@Edge supports? Check this out.
 
