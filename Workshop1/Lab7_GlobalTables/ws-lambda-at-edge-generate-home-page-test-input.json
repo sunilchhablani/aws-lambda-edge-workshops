@@ -25,7 +25,7 @@
             "cloudfront-viewer-country": [
               {
                 "value": "US",
-                "key": "Cloudfront-Viewer-Country"
+                "key": "CloudFront-Viewer-Country"
               }
             ]
           },

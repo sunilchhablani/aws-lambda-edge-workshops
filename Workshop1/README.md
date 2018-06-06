@@ -65,27 +65,21 @@ Learn how to serve content customized for the device type of a viewer.
 
 ## Lab 6 - Dynamic Origin Selection
 
-Learn how to dynamically change origin to serve content from origin nearer to country of the viewer.
+Learn how to dynamically change origin to serve content from origin nearer to the country of the viewer.
 
 [Lab 6 - Dynamic Origin Selection](./Lab6_DynamicOriginSelection/README.md)
 
 ## Lab 7 - Global Tables
 
-Learn how to serve data from DynamoDB table in region nearer to country of the viewer.
+Learn how to access data from DynamoDB table in region nearer to the country of the viewer.
 
 [Lab 7 - Global Tables](./Lab7_GlobalTables/README.md)
-
-## Cleanup
-
-1. Delete DynamoDB table `AlienCards-<unique_id>`  in "EU (Frankfurt)" region.
-2. Disable replication for S3 bucket `ws-lambda-at-edge-us-<unique_id>`. Open bucket, go to `Management` > `Replication` and select the only entry and click `Delete`.
-3. Delete all versions of all files from S3 bucket `ws-lambda-at-edge-us-<unique_id>` by clicking on `Show` for versions and selecting all files to delete.
-4. Delete all versions of all files from S3 bucket `ws-lambda-at-edge-eu-<unique_id>` by clicking on `Show` for versions and selecting all files to delete.
-5. Delete the CloudFormation stack named `WsLambdaAtEdgeAlienCards` in "US West (Oregon)" region.
 
 ## More Use Cases
 Interested in exploring more use cases that Lambda@Edge supports? Check this out.
 
-1. [Resizing Images with Amazon CloudFront & Lambda@Edge](https://aws.amazon.com/blogs/networking-and-content-delivery/resizing-images-with-amazon-cloudfront-lambdaedge-aws-cdn-blog/)
+* [Resizing Images with Amazon CloudFront & Lambda@Edge](https://aws.amazon.com/blogs/networking-and-content-delivery/resizing-images-with-amazon-cloudfront-lambdaedge-aws-cdn-blog/)
 
-2. [Authorization@Edge – How to Use Lambda@Edge and JSON Web Tokens to Enhance Web Application Security](https://aws.amazon.com/blogs/networking-and-content-delivery/authorizationedge-how-to-use-lambdaedge-and-json-web-tokens-to-enhance-web-application-security/)
+* [Authorization@Edge – How to Use Lambda@Edge and JSON Web Tokens to Enhance Web Application Security](https://aws.amazon.com/blogs/networking-and-content-delivery/authorizationedge-how-to-use-lambdaedge-and-json-web-tokens-to-enhance-web-application-security/)
+
+* [Further reading and blogs](https://aws.amazon.com/blogs/networking-and-content-delivery/category/networking-content-delivery/lambdaedge/)
