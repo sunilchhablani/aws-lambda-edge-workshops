@@ -2,7 +2,9 @@
 
 const http = require('https');
 const AWS = require('aws-sdk');
-let ddb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-10-08', region: 'eu-central-1'});
+const ddbEU = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-10-08', region: 'eu-central-1'});
+const ddbUS = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-10-08', region: 'us-west-2'});
+let ddb = ddbEU;
 
 const ddbTableName = FIXME; // Copy DynamoDB table name here, for example, 'AlienCards-1201c610'
 const cfDomainName = FIXME; // Copy CloudFront domain name here, for example, 'd1dienny4yhppe.cloudfront.net';
@@ -56,7 +58,7 @@ function updateDynamoDbClientRegion(request) {
 
     // Update DynamoDB client with nearer region 
     if (region) {
-        ddb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-10-08', region: region});
+        ddb = ddbUS;
     }
 }
 

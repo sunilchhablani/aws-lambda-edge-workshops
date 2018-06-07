@@ -1,4 +1,4 @@
-## Lab 7 - Global Tables
+## Lab 7 - Dynamic Datastore Selection
 
 In previous lab, we saw how Lambda@Edge can be used to change origin to send request to origin nearer to the country of the viewer. How about our datastore (DynamoDB tables), can we further improve performance of reading/writing data from/to datastore? The answer is Yes! With Amazon DynamoDB Global Tables, one can create tables in multiple regions and use Lambda@Edge to read/write data from/to table in a nearer region to create highly performant serverless website having global userbase.
 

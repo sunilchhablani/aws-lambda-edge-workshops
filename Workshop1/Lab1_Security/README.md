@@ -34,7 +34,9 @@ The result of the scan will be unsatisfactory:
 
 Create a Lambda function that would add the security headers to all responses from the origin in the CloudFront distribution.
 
-Go to Lambda Console, select "US East (N.Virginia)" region in the top left corner. Go to `Functions`, click `Create function` and click `Author from scratch`.
+**Note**: CloudFormation stack was created in "US West (Oregon)" and for Lambda@Edge, lambda function needs to be created in "US East (N.Virginia)" region only.
+
+Go to Lambda Console, select "US East (N.Virginia)" region in the top right corner. Go to `Functions`, click `Create function` and click `Author from scratch`.
 
 In the `Basic information` window, specify:
 * `Name`: `ws-lambda-at-edge-add-security-headers`

@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this workshop you will learn how you can use Lambda@Edge to extend functionality of your web-application or a website.
+In this workshop you will learn how you can use [Lambda@Edge](https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html) to extend functionality of your web-application or a website.
 
 **Backstory**: Aliens have arrived. Humanity cannot communicate with them because we do not speak a common language. However, the aliens are curious and willing to learn the language by looking at beautiful images with short text descriptions. Let's build a website to help the aliens learn our language using simple learning cards!
 
@@ -73,7 +73,7 @@ Learn how to dynamically change origin to serve content from origin nearer to th
 
 Learn how to access data from DynamoDB table in region nearer to the country of the viewer.
 
-[Lab 7 - Global Tables](./Lab7_GlobalTables/README.md)
+[Lab 7 - Dynamic Datastore Selection](./Lab7_DynamicDatastoreSelection/README.md)
 
 ## Cleanup
 

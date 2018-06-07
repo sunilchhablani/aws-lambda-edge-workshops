@@ -1,12 +1,13 @@
 ## Lab 6 - Dynamic Origin Selection
 
-You can front multiple backend origin application services with Amazon CloudFront and use Lambda@Edge to route requests to the appropriate origin dynamically, based on the attributes of the request. For example, you can have multiple microservices based backend origins that your Lambda@Edge functions can dynamically route to by inspecting request attributes like query strings, headers or cookies. Or you can route your viewers to the most optimal origin for latency or data locality if it is meant to run geographically distributed applications in different AWS regions. Content-based dynamic origin selection also lets you simplify your origin infrastructure by moving request routing logic from a fleet of reverse proxy servers that you would have had to manage to serverless Lambda@Edge functions.
+Consider a scenario, where you have more than one origin, and on cache misses you want to route your request to an appropriate origin based on request attributes. 
+In this lab, you will learn how to create a Lambda function that changes S3 origin region based on country of the viewer to serve content from an S3 bucket in nearer region for lower latencies.
 
-In this lab, you will learn how to create a Lambda function that changes S3 origin region based on country of the viewer to serve content from nearer region for lower latencies. 
+You can front multiple backend origin application services with Amazon CloudFront and use Lambda@Edge to route requests to the appropriate origin dynamically, based on the attributes of the request. For example, you can have multiple microservices based backend origins that your Lambda@Edge functions can dynamically route to by inspecting request attributes like query strings, headers or cookies. Or you can route your viewers to the most optimal origin for latency or data locality if it is meant to run geographically distributed applications in different AWS regions. Content-based dynamic origin selection also lets you simplify your origin infrastructure by moving request routing logic from a fleet of reverse proxy servers that you would have had to manage to serverless Lambda@Edge functions.
 
 **NOTE:** Here and below throughout the workshop, replace the example domain name `d123.cloudfront.net` with the unique name of your distribution.
 
-Currently the images served by your CloudFront distribution are read from an S3 bucket located in "EU (Frankfurt)". 
+Currently the images served by your CloudFront distribution are read from an S3 bucket located in "EU (Frankfurt)" region. 
 
 As part of this lab, we will create a new lambda function which will inspect `CloudFront-Viewer-Country` header, set by CloudFront, to find the country of the viewer and if the viewer is located in United States or Canada, origin is updated to bucket in "US West (Oregon)" region. On completion of this lab, depending upon viewer country of the users of this lab, the average response time might change. For example, for users in US and Canada, since "US West (Oregon)" is nearer than "EU (Frankfurt)", the average response time should be considerably lesser.
 
